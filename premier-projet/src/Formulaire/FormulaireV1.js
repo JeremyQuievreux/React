@@ -1,13 +1,17 @@
+// La V1 est composée de plusieurs fonctions callback
+// une par inputs
+
+//Import de base de fonction de react
 import { useState } from 'react';
+// Import du style
 import './Formulaire.scss';
-
+//Creation du composant en fonction
 function Formulaire() {
-
+    //Creation des states
     const [lastname, setLastname] = useState("");
     const [firstname, setFirstname] = useState("");
-    const [age, setAge] = useState("");
-    
-
+    const [age, setAge] = useState("");    
+    //Fonction a la soumission du formulaire
     function handleSubmit(e) {
         e.preventDefault();
         console.log("Je m'appelle " + lastname + " " + firstname + " et j'ai " + age + " ans");
@@ -15,7 +19,7 @@ function Formulaire() {
         document.getElementById("firstname").value = "";
         document.getElementById("age").value = "";
     }
-
+    //Fonction callback des events on change sur les inputs
     function handleInputLastname(e) {
         setLastname(e.target.value);
     }

@@ -1,10 +1,11 @@
+//Import du style
 import './App.scss';
+//Import des differents composants 
 import Article from './Article/Article';
 import Contenu from './Contenu/Contenu';
 import Footer from './Footer/Footer';
 import Formulaire from './Formulaire/FormulaireV2';
 import Menu from './Menu/Menu';
-
 
 function App() {
 
@@ -16,12 +17,12 @@ function App() {
       <Menu />
       <Contenu />
       <section>
+        {/* Passage de props dans les composants */}
         <Article title="Titre 1" content={article1} date="le 23/09/2021" author="Jeremy"/>
         <Article title="Titre 2" content={article2} date="le 22/09/2021" author="Maurice"/>
         <Article title="Titre 3" content={article3} date="le 21/09/2021" author="Alain"/>
       </section>
       <Formulaire />
-
       <Footer />
     </div>
   );

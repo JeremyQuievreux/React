@@ -19,7 +19,7 @@ function Formulaire({tasks, setTasks}) {
             id : taskId,
             task : task,
             type : type,
-            inprogress : true
+            done : false
         }]);
         document.getElementById("task").value = "";
         document.getElementById("task-type").value ="home";

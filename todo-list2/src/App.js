@@ -42,7 +42,7 @@ function App() {
           <button onClick={handleClick}>Ajouter</button>
         </div>
       </div>
-      <Task />
+      <Task todosList={todosList}/>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
+import Task from './Task/Task';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <button onClick={handleClick}>Ajouter</button>
         </div>
       </div>
+      <Task />
     </div>
   );
 }

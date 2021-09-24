@@ -18,7 +18,8 @@ function Formulaire({tasks, setTasks}) {
         setTasks([...tasks,{
             id : taskId,
             task : task,
-            type : type
+            type : type,
+            inprogress : true
         }]);
         document.getElementById("task").value = "";
         document.getElementById("task-type").value ="home";

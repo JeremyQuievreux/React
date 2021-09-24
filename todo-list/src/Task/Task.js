@@ -22,11 +22,25 @@ function Task({task, setTasks, tasks}) {
             break
         }
     }    
+
+    function handleCheck(e){
+        console.log("je check" + task.task);
+    }
+
+    function isInProgress(value){
+        if (value) {
+            return (<input type="checkbox" name="checkbox" id="checkbox" onChange={handleCheck}/>);
+        } else {
+            return (<input type="checkbox" name="checkbox" id="checkbox" checked onChange={handleCheck}/>);
+        }
+    }
+
         
     return(
         <div className={"task " + setClass(task.type)}>
             <p>{task.task}</p>
             <button className="close-btn" onClick={handleRemove}>X</button>
+            {isInProgress(task.inprogress)}
         </div>
     )
 }

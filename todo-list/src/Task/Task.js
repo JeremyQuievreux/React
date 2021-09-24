@@ -1,14 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Task.scss';
 
 function Task({task, setTasks, tasks}) {
     
+    const [newTask, setNewTask] = useState(task);
     const [checked , setChecked] = useState (task.done);
 
     function handleRemove() {
         const result = tasks.filter(currenttask => currenttask.id !== task.id);
         setTasks(result);
     }
+
+    function maFonction(tasks, newTask){
+        const macondition = (element) => element.id === newTask.id;
+
+        let index = tasks.findIndex(macondition);   
+        console.log(index);
+    }
+
+    useEffect(() => {
+      maFonction(tasks, newTask);  
+      },[tasks, newTask])
+    
+
 
     function setClass(valeurType){
         switch (valeurType) {

@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import './Formulaire.scss';
 
-function Formulaire(props) {
-
-    const setTasks = props.setTasks;
-    const tasks = props.tasks;
+function Formulaire({tasks, setTasks}) {
 
     const [task, setTask] = useState("");
     const [type, setType] = useState("home");
+    const [taskId, setTaskId] = useState(0);
 
     function handleInput(e) {
         setTask(e.target.value);
@@ -16,12 +14,14 @@ function Formulaire(props) {
         setType(e.target.value);
     }
     function handleClick() {
-        console.log(task + " " + type);
+        setTaskId(taskId + 1);
         setTasks([...tasks,{
+            id : taskId,
             task : task,
             type : type
         }]);
         document.getElementById("task").value = "";
+        document.getElementById("task-type").value ="home";
     }
 
 

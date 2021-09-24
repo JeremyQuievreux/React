@@ -1,7 +1,8 @@
-import { useState , useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Formulaire from './Formulaire/Formulaire';
 import Header from './Header/Header';
+import TasksList from './TasksList/TasksList';
 
 
 
@@ -9,14 +10,12 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    console.log(tasks);
-  }, [tasks]);
-
   return (
     <div className="App">
       <Header/>
       <Formulaire setTasks={setTasks} tasks={tasks}/>
+      <TasksList tasks={tasks} setTasks={setTasks}/>
+      
     </div>
   );
 }

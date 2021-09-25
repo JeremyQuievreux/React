@@ -4,8 +4,20 @@ import Task from './Task/Task';
 
 function App() {
 
+
+  function checkLocalTodos(){
+    let localTodos = localStorage.getItem("mytodos");
+  
+    if (localTodos) {
+      let parseTodo = JSON.parse(localTodos)
+      return parseTodo;
+    } else {
+      return ([]);
+    };
+  }
+
   const [task , setTask] = useState({task : "", type : "home", etat : "en cours"});
-  const [todosList, setTodosList] = useState([]);
+  const [todosList, setTodosList] = useState(checkLocalTodos());
 
   function handleInput(e) {
     setTask({...task, task : e.target.value});
@@ -21,6 +33,8 @@ function App() {
   }
 
   useEffect(() => {
+    localStorage.setItem("mytodos", JSON.stringify(todosList));
+    console.log(localStorage.getItem("mytodos"));
   }, [todosList]);
 
   function setStyle(value){

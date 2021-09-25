@@ -4,7 +4,7 @@ import Task from './Task/Task';
 
 function App() {
 
-  const [task , setTask] = useState({task : "", type : "home", etat : "en cours"});
+  const [task , setTask] = useState({task : "", type : "home", etat : "delete"});
   const [todosList, setTodosList] = useState([]);
 
   function handleInput(e) {
@@ -21,9 +21,63 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(todosList);
   }, [todosList]);
 
+
+  function getTaskInProgresse(){
+    let result = todosList.map((todo, key) => {
+      if (todo.etat === 'en cours') {
+        return (
+          <div key={key}>
+            <p>{todo.task}</p>
+            <button>
+              {todo.etat}
+            </button>
+          </div>
+        );
+      } else {
+        return <div key={key}></div>
+      }
+    });
+    return result;
+    
+  };
+  function getTaskDone(){
+    let result = todosList.map((todo, key) => {
+      if (todo.etat === 'done') {
+        return (
+          <div key={key}>
+            <p>{todo.task}</p>
+            <button>
+              {todo.etat}
+            </button>
+          </div>
+        );
+      } else {
+        return <div key={key}></div>
+      }
+    });
+    return result;
+    
+  };
+  function getTaskDelete(){
+    let result = todosList.map((todo, key) => {
+      if (todo.etat === 'delete') {
+        return (
+          <div key={key}>
+            <p>{todo.task}</p>
+            <button>
+              {todo.etat}
+            </button>
+          </div>
+        );
+      } else {
+        return <div key={key}></div>
+      }
+    });
+    return result;
+    
+  };
 
 
   return (
@@ -42,7 +96,11 @@ function App() {
           <button onClick={handleClick}>Ajouter</button>
         </div>
       </div>
-      <Task todosList={todosList}/>
+      <Task 
+        task={getTaskInProgresse()}
+        taskDone={getTaskDone()}
+        taskDelete={getTaskDelete()}
+      />
     </div>
   );
 }

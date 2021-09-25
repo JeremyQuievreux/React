@@ -4,7 +4,7 @@ import Task from './Task/Task';
 
 function App() {
 
-  const [task , setTask] = useState({task : "", type : "home", etat : "delete"});
+  const [task , setTask] = useState({task : "", type : "home", etat : "en cours"});
   const [todosList, setTodosList] = useState([]);
 
   function handleInput(e) {
@@ -26,11 +26,11 @@ function App() {
 
   function getTaskInProgresse(){
     let result = todosList.map((todo, key) => {
-      if (todo.etat === 'en cours') {
+      if (todo.etat === "en cours") {
         return (
           <div key={key}>
             <p>{todo.task}</p>
-            <button>
+            <button onClick={() => switchTerminée(todo)}>
               {todo.etat}
             </button>
           </div>
@@ -40,8 +40,19 @@ function App() {
       }
     });
     return result;
-    
   };
+  /*****/
+  function switchTerminée(todoTask){
+    let result = setTodosList((todosList) =>
+      todosList.map((item) =>
+        item === todoTask ? { ...item, etat: "done" } : item
+      )
+    );
+    return result;
+        
+  }
+
+  /*****/
   function getTaskDone(){
     let result = todosList.map((todo, key) => {
       if (todo.etat === 'done') {

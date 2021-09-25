@@ -23,15 +23,26 @@ function App() {
   useEffect(() => {
   }, [todosList]);
 
+  function setStyle(value){
+    if (value === "home") {
+      return ("home");
+    } else if (value === "hobbie") {
+      return ("hobbie");
+    } else if (value === "admin") {
+      return ("admin")
+    }
+  }
+
 
   function getTaskInProgresse(){
     let result = todosList.map((todo, key) => {
       if (todo.etat === "en cours") {
         return (
-          <div key={key}>
+          <div key={key} className={"item " + setStyle(todo.type)}>
             <p>{todo.task}</p>
-            <button onClick={() => switchTerminée(todo)}>
-              {todo.etat}
+            <p>{todo.type}</p>
+            <button onClick={() => switchToTerminée(todo)}>
+              Terminer !
             </button>
           </div>
         );
@@ -42,25 +53,48 @@ function App() {
     return result;
   };
   /*****/
-  function switchTerminée(todoTask){
+  function switchToTerminée(todoTask){
     let result = setTodosList((todosList) =>
-      todosList.map((item) =>
-        item === todoTask ? { ...item, etat: "done" } : item
-      )
+      todosList.map((item) => {
+        if (item === todoTask) {
+          return (
+            {...item, etat: "done"}
+            )
+        } else {
+          return item
+        }
+      })
     );
-    return result;
-        
+    return result;        
   }
 
+  function switchToDelete(todoTask){
+    let result = setTodosList((todosList) =>
+      todosList.map((item) => {
+        if (item === todoTask) {
+          return (
+            {...item, etat: "delete"}
+            )
+        } else {
+          return item
+        }
+      })
+    );
+    return result;        
+  }
+  /* 
+  item === todoTask ? { ...item, etat: "done" } : item 
+  */
   /*****/
   function getTaskDone(){
     let result = todosList.map((todo, key) => {
       if (todo.etat === 'done') {
         return (
-          <div key={key}>
+          <div key={key} className={"item " + setStyle(todo.type)}>
             <p>{todo.task}</p>
-            <button>
-              {todo.etat}
+            <p>{todo.type}</p>
+            <button onClick={() => switchToDelete(todo)}>
+              Supprimer !
             </button>
           </div>
         );
@@ -75,11 +109,9 @@ function App() {
     let result = todosList.map((todo, key) => {
       if (todo.etat === 'delete') {
         return (
-          <div key={key}>
+          <div key={key} className={"item " + setStyle(todo.type)}>
             <p>{todo.task}</p>
-            <button>
-              {todo.etat}
-            </button>
+            <p>{todo.type}</p>
           </div>
         );
       } else {

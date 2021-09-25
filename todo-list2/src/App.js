@@ -6,7 +6,7 @@ function App() {
 
 
   function checkLocalTodos(){
-    let localTodos = localStorage.getItem("mytodos");
+    let localTodos = localStorage.getItem("todoListV1");
   
     if (localTodos) {
       let parseTodo = JSON.parse(localTodos)
@@ -33,8 +33,8 @@ function App() {
   }
 
   useEffect(() => {
-    localStorage.setItem("mytodos", JSON.stringify(todosList));
-    console.log(localStorage.getItem("mytodos"));
+    localStorage.setItem("todoListV1", JSON.stringify(todosList));
+    console.log(localStorage.getItem("todoListV1"));
   }, [todosList]);
 
   function setStyle(value){
@@ -66,7 +66,7 @@ function App() {
     });
     return result;
   };
-  /*****/
+
   function switchToTerminée(todoTask){
     let result = setTodosList((todosList) =>
       todosList.map((item) => {
@@ -96,10 +96,7 @@ function App() {
     );
     return result;        
   }
-  /* 
-  item === todoTask ? { ...item, etat: "done" } : item 
-  */
-  /*****/
+  
   function getTaskDone(){
     let result = todosList.map((todo, key) => {
       if (todo.etat === 'done') {
@@ -136,6 +133,19 @@ function App() {
     
   };
 
+  function handleReset() {
+  let response = prompt("Voulez vous vraiment supprimer toute vous taches ?\n \"OUI\" ou \"NON\"");
+    checkResponse(response);    
+  }
+  function checkResponse(response){
+    if (response === "OUI") {
+      localStorage.removeItem("todoListV1");
+      setTodosList([]);
+    } else if (response === "NON") {
+    } else {
+      handleReset();
+    }
+  }
 
   return (
     <div className="App">
@@ -151,6 +161,7 @@ function App() {
             <option value="admin">Administration</option>
           </select>
           <button onClick={handleClick}>Ajouter</button>
+          <button onClick={handleReset} >Reset LocalStorage</button>
         </div>
       </div>
       <Task 
